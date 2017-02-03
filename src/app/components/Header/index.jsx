@@ -1,15 +1,14 @@
-import React, { Component, PureComponent } from 'react';
-import AppBar from 'react-toolbox/lib/app_bar';
+import React, { Component } from 'react';
+import { LHeader } from 'components/Layout'
 
-import style from './Header.css'
+import css from './Header.css'
 
-export default class Header extends PureComponent {
+export default class Header extends Component {
   render() {
-    console.log('render')
+    const { children } = this.props;
+
     return (
-      <AppBar className={style.appbar}>
-        <a href="/home">React Toolbox Docs</a>
-      </AppBar>
+      <div>Header</div>
     );
   }
 }

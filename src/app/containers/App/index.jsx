@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+
+import Layout from 'components/Layout'
+const { LContent, LHeader } = Layout;
+
 import Header from 'components/Header';
 import SidebarNavigation from 'components/SidebarNavigation';
+import Map from 'components/Map';
+import Table from 'components/Table';
 
 import style from './App.css';
 
@@ -9,7 +15,8 @@ let SDK;
 export default class App extends Component {
 
   state = {
-    name: 'name'
+    name: 'name',
+    taggedPlaces: [],
   };
 
   click = () => {
@@ -109,8 +116,8 @@ export default class App extends Component {
     }
 
      FB.login(function(response) {
-    statusChangeCallback(response);
- }, {scope: 'public_profile,email,user_friends,user_tagged_places'});
+        statusChangeCallback(response);
+     }, {scope: 'public_profile,email,user_friends,user_tagged_places'});
 
     // SDK.getLoginStatus(function(response) {
     //   console.log(response)
@@ -121,28 +128,31 @@ export default class App extends Component {
   }
 
   getFriends = () => {
+    const self = this;
     FB.api(
       '/me/tagged_places',
       'GET',
       {},
       function(response) {
-        console.log(response)
+        self.setState({taggedPlaces: response.data});
       }
     );
   }
 
   render() {
+          console.log(this.state.taggedPlaces)
     return (
-      <div>
-        <Header />
-        <div onClick={this.click} >
-            {this.state.name}
-        </div>
-        <button onClick={this.login}>fb login</button>
-        <button onClick={this.getFriends}>get friends</button>
-        <div id="status">
-        </div>
-      </div>
+      <Layout>
+        <LHeader>
+          <Header />
+        </LHeader>
+        <LContent>
+          <button onClick={this.login}>fb login</button>
+          <button onClick={this.getFriends}>get friends</button>
+          <div id="status"></div>
+          <Table source={this.state.taggedPlaces} />
+        </LContent>
+      </Layout>
     );
   }
 }

@@ -18,7 +18,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: 'http://localhost:9000/'
+    publicPath: 'http://localhost:8001/'
   },
   plugins: [
     // new webpack.DefinePlugin({
@@ -45,7 +45,11 @@ module.exports = {
       {
         test: /(\.scss|\.css)$/,
         loader: 'style?singleton!css?-autoprefixer&-minimize&sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss!sass'
-      }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
     ]
   },
   postcss: [autoprefixer],
@@ -62,6 +66,7 @@ module.exports = {
         imgs: path.join(__dirname, 'src/imgs'),
         app: path.join(__dirname, 'src/app'),
         components: path.join(__dirname, 'src/app/components'),
+        theme: path.join(__dirname, 'src/app/theme'),
       },
       extensions: ['', '.js', '.jsx', '.json', '.scss', '.css', '.html', '.sass'],
 
