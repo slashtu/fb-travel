@@ -66,7 +66,9 @@ module.exports = {
         imgs: path.join(__dirname, 'src/imgs'),
         app: path.join(__dirname, 'src/app'),
         components: path.join(__dirname, 'src/app/components'),
+        containers: path.join(__dirname, 'src/app/containers'),
         theme: path.join(__dirname, 'src/app/theme'),
+        actions: path.join(__dirname, 'src/app/actions'),
       },
       extensions: ['', '.js', '.jsx', '.json', '.scss', '.css', '.html', '.sass'],
 

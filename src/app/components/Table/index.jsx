@@ -9,9 +9,6 @@ console.log("Taiwan => " + countries.getAlpha3Code('Taiwan', 'en'));
 const UserModel = {
   name: {type: String},
   date: {type: Date},
-  country: {type: String},
-  city: {type: String},
-  street: {type: String},
 };
 
 export default class Table extends PureComponent {
@@ -26,8 +23,6 @@ export default class Table extends PureComponent {
         street: item.place.location.street,
       }
     })
-
-    console.log(places);
     return (
       <MTable
         selectable = {false}

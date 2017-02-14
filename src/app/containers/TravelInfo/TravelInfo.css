@@ -1,0 +1,9 @@
+.Map {
+  flex: 2;
+}
+
+.Table {
+  flex: 1;
+  overflow-y: scroll;
+  height: calc( 100vh - 100px );
+}

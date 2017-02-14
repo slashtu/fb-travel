@@ -29,12 +29,17 @@
     "i18n-iso-countries": "^1.8.1",
     "immutability-helper": "^2.0.0",
     "jade": "^1.11.0",
+    "lodash": "^4.17.4",
     "morgan": "^1.7.0",
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-redux": "^5.0.2",
     "react-router": "^2.8.1",
     "react-toolbox": "^1.2.5",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.8.1",
+    "redux-saga": "^0.14.3",
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {

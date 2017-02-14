@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import css from './Layout'
 
-class LHeader extends Component {
+class Header extends Component {
   render() {
     const { children } = this.props;
 
     return (
-      <div className={css.LHeader}>
+      <div className={css.Header}>
         {children}
       </div>
     );
@@ -25,20 +25,32 @@ class Layout extends Component {
   }
 }
 
-class LContent extends Component {
+class Content extends Component {
   render() {
-    console.log(css, 'css')
     const { children } = this.props;
 
     return (
-      <div className={css.LContent}>
+      <div className={css.Content}>
         {children}
       </div>
     );
   }
 }
 
-Layout.LHeader = LHeader;
-Layout.LContent = LContent;
+class Row extends Component {
+  render() {
+    const { children } = this.props;
+
+    return (
+      <div className={css.Row}>
+        {children}
+      </div>
+    );
+  }
+}
+
+Layout.Header = Header;
+Layout.Content = Content;
+Layout.Row = Row;
 
 export default Layout;

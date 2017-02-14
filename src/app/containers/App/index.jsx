@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 
-import Layout from 'components/Layout'
-const { LContent, LHeader } = Layout;
+// redux
+import { setFBSDK } from 'actions';
 
-import Header from 'components/Header';
-import SidebarNavigation from 'components/SidebarNavigation';
+// containers
+import TravelInfo from 'containers/TravelInfo';
+
+// components
+import Layout from 'components/Layout';
+import AppBar from 'components/AppBar';
 import Map from 'components/Map';
-import Table from 'components/Table';
 
-import style from './App.css';
+import css from './App.css';
+
+const { Content, Header, Row } = Layout;
 
 let SDK;
 
@@ -24,6 +29,7 @@ export default class App extends Component {
   }
 
   componentDidMount(){
+    const self = this;
     // This is called with the results from from FB.getLoginStatus().
     
 
@@ -39,7 +45,6 @@ export default class App extends Component {
 
     window.fbAsyncInit = function() {
       FB.init({
-
         appId      : '306917059703858',
         cookie     : true,  // enable cookies to allow the server to access 
                             // the session
@@ -63,6 +68,7 @@ export default class App extends Component {
 
       FB.getLoginStatus(function(response) {
         console.log(response)
+        self.getTaggedPlaces();
         // statusChangeCallback(response);
       });
 
@@ -76,8 +82,6 @@ export default class App extends Component {
       js.src = "//connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
-
   }
 
   login = () => {
@@ -115,19 +119,17 @@ export default class App extends Component {
       }
     }
 
-     FB.login(function(response) {
-        statusChangeCallback(response);
-     }, {scope: 'public_profile,email,user_friends,user_tagged_places'});
+    FB.login(function(response) {
+      statusChangeCallback(response);
+    }, {scope: 'public_profile,email,user_friends,user_tagged_places'});
 
     // SDK.getLoginStatus(function(response) {
     //   console.log(response)
     //   statusChangeCallback(response);
     // });
-
-
   }
 
-  getFriends = () => {
+  getTaggedPlaces = () => {
     const self = this;
     FB.api(
       '/me/tagged_places',
@@ -140,18 +142,14 @@ export default class App extends Component {
   }
 
   render() {
-          console.log(this.state.taggedPlaces)
     return (
       <Layout>
-        <LHeader>
-          <Header />
-        </LHeader>
-        <LContent>
-          <button onClick={this.login}>fb login</button>
-          <button onClick={this.getFriends}>get friends</button>
-          <div id="status"></div>
-          <Table source={this.state.taggedPlaces} />
-        </LContent>
+        <Header>
+          <AppBar/>
+        </Header>
+        <Content>
+          <TravelInfo taggedPlaces={this.state.taggedPlaces} />
+        </Content>
       </Layout>
     );
   }

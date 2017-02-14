@@ -1,5 +1,33 @@
 @import "./color";
 
-$primary-color: $deep-pruple-500;
+$primary-color: $blue-500;
 
 $body-color: $grey-200;
+
+// Header
+$header-height: 50px;
+
+body {
+  background-color: $body-color; 
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: $blue-500;
+  outline: 1px solid red;
+}
+
+// ::-webkit-scrollbar              { /* 1 */ }
+// ::-webkit-scrollbar-button       { /* 2 */ }
+// ::-webkit-scrollbar-track        { /* 3 */ }
+// ::-webkit-scrollbar-track-piece  { /* 4 */ }
+// ::-webkit-scrollbar-thumb        { /* 5 */ }
+// ::-webkit-scrollbar-corner       { /* 6 */ }
+// ::-webkit-resizer                { /* 7 */ }

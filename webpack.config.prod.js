@@ -12,11 +12,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   devtool: 'source-map',
   entry: [
+    // 'webpack-hot-middleware/client',
     './src/app/index'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
+    // publicPath: 'http://localhost:8001/'
   },
   plugins: [
     // new webpack.DefinePlugin({
@@ -25,25 +27,29 @@ module.exports = {
     // new webpack.ProvidePlugin({
     //   'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     // }),
-    new ExtractTextPlugin('bundle.css', { allChunks: true }),
+    // new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('development')
     })
   ],
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
+        loaders: ['react-hot', 'babel'],
         exclude: /(node_modules)/,
         include: path.join(__dirname, 'src')
       },
       {
         test: /(\.scss|\.css)$/,
-        loader: ExtractTextPlugin.extract("style-loader","css?-autoprefixer&-minimize&modules&importLoaders=1&localIdentName=[hash:base64:3]!postcss!sass")
-      }
+        loader: 'style?singleton!css?-autoprefixer&-minimize&sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss!sass'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
     ]
   },
   postcss: [autoprefixer],
@@ -51,6 +57,7 @@ module.exports = {
     data: '@import "theme/_theme.scss";',
     includePaths: [path.resolve(__dirname, './src/app')]
   },
+  // postcss: [postcssNested, autoprefixer],
   resolve: {
       // you can now require('file') instead of require('file.coffee')
       alias:{
@@ -59,6 +66,9 @@ module.exports = {
         imgs: path.join(__dirname, 'src/imgs'),
         app: path.join(__dirname, 'src/app'),
         components: path.join(__dirname, 'src/app/components'),
+        containers: path.join(__dirname, 'src/app/containers'),
+        theme: path.join(__dirname, 'src/app/theme'),
+        actions: path.join(__dirname, 'src/app/actions'),
       },
       extensions: ['', '.js', '.jsx', '.json', '.scss', '.css', '.html', '.sass'],
 
