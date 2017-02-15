@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Promise from 'bluebird';
+
+import { connect } from 'react-redux';
 
 // redux
-import { setFBSDK } from 'actions';
+import { fetchFBLoginStatus } from 'actions';
 
 // containers
 import TravelInfo from 'containers/TravelInfo';
@@ -16,9 +17,7 @@ import css from './App.css';
 
 const { Content, Header, Row } = Layout;
 
-let SDK;
-
-export default class App extends Component {
+class App extends Component {
 
   state = {
     name: 'name',
@@ -30,79 +29,7 @@ export default class App extends Component {
   }
 
   componentDidMount(){
-    const self = this;
-    // This is called with the results from from FB.getLoginStatus().
-    
-
-    // This function is called when someone finishes with the Login
-    // Button.  See the onlogin handler attached to it in the sample
-    // code below.
-    function checkLoginState() {
-      FB.getLoginStatus(function(response) {
-        console.log()
-        statusChangeCallback(response);
-      });
-    }
-
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '306917059703858',
-        cookie     : true,  // enable cookies to allow the server to access 
-                            // the session
-        xfbml      : true,  // parse social plugins on this page
-        version    : 'v2.8' // use graph api version 2.8
-      });
-
-      // Now that we've initialized the JavaScript SDK, we call 
-      // FB.getLoginStatus().  This function gets the state of the
-      // person visiting this page and can return one of three states to
-      // the callback you provide.  They can be:
-      //
-      // 1. Logged into your app ('connected')
-      // 2. Logged into Facebook, but not your app ('not_authorized')
-      // 3. Not logged into Facebook and can't tell if they are logged into
-      //    your app or not.
-      //
-      // These three cases are handled in the callback function.
-
-      SDK = FB;
-
-      let FbGetLogin = function(){
-
-        var gg = new Promise(function(resolve, reject){
-          console.log('promise', resolve)
-          FB.getLoginStatus(resolve);
-        });  
-        console.log(gg)
-        return gg
-      }
-
-
-
-      var pro = FbGetLogin().then(function(response) {
-        console.log(response)
-        self.getTaggedPlaces();
-        // statusChangeCallback(response);
-      });
-
-      console.log(pro)
-
-      // FB.getLoginStatus(function(response) {
-      //   console.log(response)
-      //   self.getTaggedPlaces();
-      //   // statusChangeCallback(response);
-      // });
-
-    };
-
-    // Load the SDK asynchronously
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    this.props.fetchFBLoginStatus();
   }
 
   login = () => {
@@ -175,3 +102,15 @@ export default class App extends Component {
     );
   }
 }
+
+function mapStateToProps({ FB }) {
+  return {
+    FB
+  };
+}
+
+export default connect(
+  mapStateToProps, {
+    fetchFBLoginStatus,
+  }
+)(App)
