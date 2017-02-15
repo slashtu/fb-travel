@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Promise from 'bluebird';
 
 // redux
 import { setFBSDK } from 'actions';
@@ -66,11 +67,31 @@ export default class App extends Component {
 
       SDK = FB;
 
-      FB.getLoginStatus(function(response) {
+      let FbGetLogin = function(){
+
+        var gg = new Promise(function(resolve, reject){
+          console.log('promise', resolve)
+          FB.getLoginStatus(resolve);
+        });  
+        console.log(gg)
+        return gg
+      }
+
+
+
+      var pro = FbGetLogin().then(function(response) {
         console.log(response)
         self.getTaggedPlaces();
         // statusChangeCallback(response);
       });
+
+      console.log(pro)
+
+      // FB.getLoginStatus(function(response) {
+      //   console.log(response)
+      //   self.getTaggedPlaces();
+      //   // statusChangeCallback(response);
+      // });
 
     };
 
