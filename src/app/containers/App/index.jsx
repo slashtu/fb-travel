@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // redux
-import { fetchFBLoginStatus } from 'actions';
+import { fetchFBLoginStatus, fetchTaggedPlaces } from 'actions';
 
 // containers
 import TravelInfo from 'containers/TravelInfo';
@@ -17,6 +17,8 @@ import css from './App.css';
 
 const { Content, Header, Row } = Layout;
 
+import LoadFB from '../../lib/FB';
+
 class App extends Component {
 
   state = {
@@ -29,7 +31,9 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchFBLoginStatus();
+    // this.props.fetchFBLoginStatus();
+    // this.props.fetchTaggedPlaces();
+    this.getTaggedPlaces();
   }
 
   login = () => {
@@ -79,14 +83,18 @@ class App extends Component {
 
   getTaggedPlaces = () => {
     const self = this;
-    FB.api(
-      '/me/tagged_places',
-      'GET',
-      {},
-      function(response) {
-        self.setState({taggedPlaces: response.data});
-      }
-    );
+    LoadFB().then( FB => {
+      console.log(FB)
+      FB.api(
+        '/me/tagged_places',
+        'GET',
+        {},
+        function(response) {
+          console.log(response)
+          self.setState({taggedPlaces: response.data});
+        }
+      );
+    });
   }
 
   render() {
@@ -112,5 +120,6 @@ function mapStateToProps({ FB }) {
 export default connect(
   mapStateToProps, {
     fetchFBLoginStatus,
+    fetchTaggedPlaces,
   }
 )(App)
