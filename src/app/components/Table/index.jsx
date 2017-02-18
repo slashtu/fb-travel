@@ -1,16 +1,21 @@
 import React, { Component, PureComponent } from 'react';
+import FontAwesome from 'react-fontawesome';
 
-import LogItem from './LogItem';
-import Loading from 'components/Loading';
+import LogItem from './TableItem';
 import css from './Table'
 
 export default class Table extends PureComponent {
 
-  renderContent = ( loading = true, source ) => {
-    if (loading) return <Loading />;
+  renderContent = ( loading = true, columns, detailColumns, source) => {
+    if (loading) return <FontAwesome
+        className={css.Loading}
+        name='refresh'
+        size='3x'
+        spin
+      />;
 
     const items = source.map((item, index) => {
-      return <LogItem key={index} />
+      return <LogItem key={index} item={item} columns={columns} detailColumns={detailColumns} />
     });
 
     return items;
@@ -18,24 +23,26 @@ export default class Table extends PureComponent {
 
   renderColumns = () => {
     const columns = this.props.columns.map( (column) => {
-      return <span key={column.dataIndex} >{column.title}</span>
+      return <span key={column.key} >{column.title}</span>
     })
     // console.log(columns)
     return columns;
   }
 
   render() {
-    const { columns, source, isLoading } = this.props;
+    const { columns, detailColumns, source, isLoading } = this.props;
 
-    // console.table(source) 
+    console.table(source) 
+    console.table(columns) 
+    console.table(detailColumns) 
 
     return (
-      <div className={css.LogTable}>
-        <div className={css.logTitle}>
+      <div className={css.Table}>
+        <div className={css.Head}>
           {this.renderColumns()}
         </div>
-        <div className={css.logContent}>
-          {this.renderContent( false, source)}
+        <div className={css.Body}>
+          {this.renderContent( isLoading, columns, detailColumns, source)}
         </div>
       </div>
     );

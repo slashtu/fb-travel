@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects'
+import { put, fork, takeEvery } from 'redux-saga/effects'
 import loadFBSDK from '../lib/FB'
 import { updateFBLoginStatus, updateTaggedPlaces } from 'actions'
 
@@ -50,8 +50,8 @@ export function* fetchTaggedPlacesSaga() {
 
 export default function* rootSaga() {
   yield [
-    helloSaga(),
-    fetchFBLoginStatusSaga(),
-    fetchTaggedPlacesSaga(),
+    // helloSaga(),
+    // fetchFBLoginStatusSaga(),
+    fork(fetchTaggedPlacesSaga),
   ]
 }

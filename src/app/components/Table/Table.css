@@ -1,35 +1,34 @@
-.LogTable {
-  padding: 20px 30px;
-  min-height: 300px;
-  > h4 {
-    color: red;
-  }
+@import "theme/default";
+
+.Table {
+  padding: 0px 25px;
 }
 
-.noLog {
-  text-align: center;
-  font-size: 32px;
-  color: blue;
-}
-
-.logTitle {
-  composes: itemLayout from './LogItem/LogItem.css';
+.Head {
+  display: flex;
   font-weight: bold;
-  font-size: 16px;
-  // color: ci-color;
-  cursor: none
-  &:hover {
-    background: none;
-  }
+  font-size: 20px;
+  color: $color-table-head;
+
   > span {
-    display: flex;
-    align-items: center;
-    height: 24px;
-    // color: ci-color;
-    /* justify-content: center; */
+    padding: 8px 16px;
+    
+    &:nth-child(1) {
+      flex: 2;
+    }
+    &:nth-child(2) {
+      flex: 1;
+    }
   }
   border-bottom: 2px solid;
 }
 
-.logContent {
+.Loading {
+  color: $second-color;
+  margin-left: 45%;
+  margin-top: 50%;
+}
+
+.Body {
+  color: $color-text-primary;
 }
