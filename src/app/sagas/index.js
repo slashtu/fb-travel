@@ -21,6 +21,10 @@ export function* fetchFBLoginStatus() {
 
 export function* fetchTaggedPlaces() {
   const SDK = yield loadFBSDK();
+  
+  const status = yield SDK.getLoginStatusAsync();
+  yield put(updateFBLoginStatus(status));
+
   const places = yield SDK.apiAsync('/me/tagged_places', 'GET', {});
   yield put(updateTaggedPlaces(places));
 }

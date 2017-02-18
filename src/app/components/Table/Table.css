@@ -1,0 +1,35 @@
+.LogTable {
+  padding: 20px 30px;
+  min-height: 300px;
+  > h4 {
+    color: red;
+  }
+}
+
+.noLog {
+  text-align: center;
+  font-size: 32px;
+  color: blue;
+}
+
+.logTitle {
+  composes: itemLayout from './LogItem/LogItem.css';
+  font-weight: bold;
+  font-size: 16px;
+  // color: ci-color;
+  cursor: none
+  &:hover {
+    background: none;
+  }
+  > span {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    // color: ci-color;
+    /* justify-content: center; */
+  }
+  border-bottom: 2px solid;
+}
+
+.logContent {
+}

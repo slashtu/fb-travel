@@ -6,4 +6,7 @@
   flex: 1;
   overflow-y: scroll;
   height: calc( 100vh - 100px );
+  border-left: 1px solid #8BC34A;
+  margin-left: 17px;
+  padding: 10px
 }

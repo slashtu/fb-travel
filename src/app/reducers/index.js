@@ -1,10 +1,22 @@
 import { combineReducers } from 'redux';
-import { RENAME_PLACES, UPDATE_FB_LOGIN_STATUS } from '../actions'
+import { 
+  RENAME_PLACES, 
+  UPDATE_FB_LOGIN_STATUS, 
+  UPDATE_TAGGED_PLACES 
+} from '../actions'
 
-const taggedPlaces = (state = [], action) => {
+const initState = {
+  data: [],
+  isLoading: true,
+}
+
+const taggedPlaces = (state = initState, action) => {
   switch (action.type) {
-    case RENAME_PLACES:
-      return state.push({name: 'slash'});
+    case UPDATE_TAGGED_PLACES:
+      return { 
+        data: action.places.data,
+        isLoading: false,
+      };
     default:
       return state;
   }

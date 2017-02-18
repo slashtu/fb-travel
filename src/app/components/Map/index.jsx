@@ -20,8 +20,15 @@ export default class Map extends PureComponent {
       element: document.getElementById("map"),
       projection: 'mercator',
       fills: {
-        defaultFill: "#ABDDA4",
-        authorHasTraveledTo: "#fa0fa0"
+        defaultFill: "#CFD8DC",
+        authorHasTraveledTo: "#8BC34A"
+      },
+      geographyConfig: {
+        highlightOnHover: true,
+        highlightFillColor: '#FFA726',
+        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+        highlightBorderWidth: 2,
+        highlightBorderOpacity: 1
       },
       data: {
         // USA: { fillKey: "authorHasTraveledTo" },

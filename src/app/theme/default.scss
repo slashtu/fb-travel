@@ -1,8 +1,11 @@
 @import "./color";
 
-$primary-color: $blue-500;
+$primary-color: $light-green-500;
+$second-color: $orange-500;
 
-$body-color: $grey-200;
+/*$color-text-secondary: $palette-deep-orange-400;*/
+
+$body-color: white;
 
 // Header
 $header-height: 50px;
@@ -20,7 +23,7 @@ body {
 }
  
 ::-webkit-scrollbar-thumb {
-  background-color: $blue-500;
+  background-color: $primary-color;
   outline: 1px solid red;
 }
 

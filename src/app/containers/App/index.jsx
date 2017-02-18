@@ -31,9 +31,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    // this.props.fetchFBLoginStatus();
-    // this.props.fetchTaggedPlaces();
-    this.getTaggedPlaces();
+    this.props.fetchTaggedPlaces();
   }
 
   login = () => {
@@ -81,22 +79,6 @@ class App extends Component {
     // });
   }
 
-  getTaggedPlaces = () => {
-    const self = this;
-    LoadFB().then( FB => {
-      console.log(FB)
-      FB.api(
-        '/me/tagged_places',
-        'GET',
-        {},
-        function(response) {
-          console.log(response)
-          self.setState({taggedPlaces: response.data});
-        }
-      );
-    });
-  }
-
   render() {
     return (
       <Layout>
@@ -104,7 +86,7 @@ class App extends Component {
           <AppBar/>
         </Header>
         <Content>
-          <TravelInfo taggedPlaces={this.state.taggedPlaces} />
+          <TravelInfo/>
         </Content>
       </Layout>
     );
@@ -113,7 +95,7 @@ class App extends Component {
 
 function mapStateToProps({ FB }) {
   return {
-    FB
+    FB,
   };
 }
 
