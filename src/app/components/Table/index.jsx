@@ -32,10 +32,6 @@ export default class Table extends PureComponent {
   render() {
     const { columns, detailColumns, source, isLoading } = this.props;
 
-    console.table(source) 
-    console.table(columns) 
-    console.table(detailColumns) 
-
     return (
       <div className={css.Table}>
         <div className={css.Head}>
