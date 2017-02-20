@@ -24,6 +24,8 @@ export default class App extends Component {
   }
 
   componentDidMount(){
+
+    var self = this;
     // This is called with the results from from FB.getLoginStatus().
     
 
@@ -64,7 +66,30 @@ export default class App extends Component {
       FB.getLoginStatus(function(response) {
         console.log(response)
         // statusChangeCallback(response);
+
+        // The response object is returned with a status field that lets the
+        // app know the current login status of the person.
+        // Full docs on the response object can be found in the documentation
+        // for FB.getLoginStatus().
+        if (response.status === 'connected') {
+          // Logged into your app and Facebook.
+          testAPI();
+        } else if (response.status === 'not_authorized') {
+          // The person is logged into Facebook, but not your app.
+          // document.getElementById('status').innerHTML = 'Please log ' +
+            // 'into this app.';
+            self.login();
+        } else {
+          // The person is not logged into Facebook, so we're not sure if
+          // they are logged into this app or not.
+          // document.getElementById('status').innerHTML = 'Please log ' +
+            // 'into Facebook.';
+            self.login();
+        }
+
       });
+
+      // self.login();
 
     };
 
@@ -117,7 +142,7 @@ export default class App extends Component {
 
      FB.login(function(response) {
         statusChangeCallback(response);
-     }, {scope: 'public_profile,email,user_friends,user_tagged_places'});
+     }, {scope: 'email, user_tagged_places'});
 
     // SDK.getLoginStatus(function(response) {
     //   console.log(response)
