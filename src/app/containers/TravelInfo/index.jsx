@@ -37,7 +37,7 @@ class TravelInfo extends Component {
   render() {
     const { taggedPlaces } = this.props
 
-    console.table(taggedPlaces)
+    // console.table(taggedPlaces)
 
     const places = taggedPlaces.data.map((item, index) => {
       const date = new Date(item.created_time);

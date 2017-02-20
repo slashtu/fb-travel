@@ -33,6 +33,15 @@ export default function loadFBSDK () {
           window.FB.api( path, method, params, resolve);
         });  
       }
+
+      window.FB.loginAsync = function () {
+        return new Promise(function(resolve, reject){
+          window.FB.login( resolve, {scope: 'public_profile, user_tagged_places'});
+        });  
+      }
+    //   FB.login(function(response) {
+    //   statusChangeCallback(response);
+    // }, {scope: 'public_profile,email,user_friends,user_tagged_places'});
       
       resolve(window.FB);
     }

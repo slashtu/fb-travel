@@ -1,16 +1,15 @@
 import { put, fork, takeEvery } from 'redux-saga/effects'
 import loadFBSDK from '../lib/FB'
-import { updateFBLoginStatus, updateTaggedPlaces } from 'actions'
+import { updateFBLoginStatus, updateTaggedPlaces, fbLogin, fetchTaggedPlaces } from 'actions'
 
-export function* incrementAsync() {
-  console.log('delay')
-  yield delay(1000)
-  yield put({ type: 'INCREMENT' })
-}
+export function* fbLoginTask() {
+  const SDK = yield loadFBSDK();
+  const response = yield SDK.loginAsync();
+  yield put(updateFBLoginStatus(response));
 
-export function* loadFBSDKAsync() {
-  yield delay(1000)
-  yield put({ type: 'INCREMENT' })
+  if (response.status === 'connected') {
+    yield put(fetchTaggedPlaces());
+  }
 }
 
 export function* fetchFBLoginStatus() {
@@ -19,24 +18,31 @@ export function* fetchFBLoginStatus() {
   yield put(updateFBLoginStatus(status));
 }
 
-export function* fetchTaggedPlaces() {
+export function* fetchTaggedPlacesTask() {
   const SDK = yield loadFBSDK();
+  const response = yield SDK.getLoginStatusAsync();
   
-  const status = yield SDK.getLoginStatusAsync();
-  yield put(updateFBLoginStatus(status));
+  yield put(updateFBLoginStatus(response));
 
-  const places = yield SDK.apiAsync('/me/tagged_places', 'GET', {});
-  yield put(updateTaggedPlaces(places));
+  if (response.status === 'connected') {
+    const places = yield SDK.apiAsync('/me/tagged_places', 'GET', {});
+    yield put(updateTaggedPlaces(places));
+
+  }else if (response.status === 'not_authorized') {
+    // The person is logged into Facebook, but not your app.
+    yield put(fbLogin());
+
+  } else {
+    // The person is not logged into Facebook, so we're not sure if
+    // they are logged into this app or not.
+    yield put(fbLogin());
+  }
 }
 
 
 // Saga event
-export function* watchIncrementAsync() {
-  yield takeEvery('INCREMENT_ASYNC', incrementAsync)
-}
-
-export function* helloSaga() {
-  console.log('Hello Sagas!~~~')
+export function* fbLoginSaga() {
+  yield takeEvery('FB_LOGIN', fbLoginTask)
 }
 
 export function* fetchFBLoginStatusSaga() {
@@ -45,13 +51,14 @@ export function* fetchFBLoginStatusSaga() {
 
 
 export function* fetchTaggedPlacesSaga() {
-  yield takeEvery('FETCH_TAGGED_PLACES', fetchTaggedPlaces)
+  yield takeEvery('FETCH_TAGGED_PLACES', fetchTaggedPlacesTask)
 }
 
 export default function* rootSaga() {
   yield [
     // helloSaga(),
     // fetchFBLoginStatusSaga(),
+    fork(fbLoginSaga),
     fork(fetchTaggedPlacesSaga),
   ]
 }
