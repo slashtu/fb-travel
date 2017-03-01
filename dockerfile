@@ -15,5 +15,5 @@ ADD . /usr/src/app
 
 EXPOSE 8000
 
-CMD [ "npm", "run", "uat" ]
+CMD [ "npm", "start" ]
 
