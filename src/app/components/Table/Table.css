@@ -7,7 +7,7 @@
 .Head {
   display: flex;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   color: $color-table-head;
 
   > span {
