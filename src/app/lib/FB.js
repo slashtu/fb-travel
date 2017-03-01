@@ -14,7 +14,7 @@ export default function loadFBSDK () {
   SDK = SDK || new Promise(function (resolve) {
     function sdkReady () {
       window.FB.init({
-        appId      : '306917059703858',
+        appId      : '306910796371151',
         cookie     : true,  // enable cookies to allow the server to access 
                             // the session
         xfbml      : true,  // parse social plugins on this page
