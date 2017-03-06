@@ -1,7 +1,7 @@
 {
   "name": "fb-trave",
   "version": "1.0.0",
-  "description": "An user interface of centralize DB",
+  "description": "Show tagged places on facebook",
   "main": "index.js",
   "scripts": {
     "init": "rm -rf dist",
@@ -9,12 +9,9 @@
     "production": "webpack --config webpack.config.prod.js && NODE_ENV=production node ./bin/www.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Nexusguard/fb-trave.git"
-  },
-  "author": "NXG",
-  "license": "ISC",
+  "repository": "git+https://github.com/slashtu/fb-travel.git",
+  "author": "Slash",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Nexusguard/fb-trave/issues"
   },
