@@ -11,7 +11,7 @@ import countries from 'i18n-iso-countries';
 
 import css from './Map'
 
-console.log("Taiwan => " + countries.getAlpha3Code('Taiwan', 'en'));
+console.log("Taiwan => " + countries.getAlpha3Code('United States of America', 'en'));
 
 export default class Map extends PureComponent {
 
@@ -65,8 +65,16 @@ export default class Map extends PureComponent {
   
     const places = flow(
       map_fp(
-        (place) => { 
-          return { country: countries.getAlpha3Code(place.place.location.country, 'en')}; 
+        (place) => {
+          let Alpha3Code;
+
+          // country name exception
+          if(place.place.location.country === 'United States'){
+            Alpha3Code = 'USA';
+          }else{
+            Alpha3Code = countries.getAlpha3Code(place.place.location.country, 'en');
+          }
+          return { country: Alpha3Code }; 
         }
       ),
       countBy_fp('country'),
