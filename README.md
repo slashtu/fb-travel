@@ -4,7 +4,7 @@
   ```
   $ npm install webpack -g
   $ npm install 
-  $ npm starst
+  $ npm start
   ```
  
 # Framework
