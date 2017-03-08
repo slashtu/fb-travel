@@ -25,13 +25,11 @@ export default class Table extends PureComponent {
     const columns = this.props.columns.map( (column) => {
       return <span key={column.key} >{column.title}</span>
     })
-    // console.log(columns)
     return columns;
   }
 
   render() {
     const { columns, detailColumns, source, isLoading } = this.props;
-
     return (
       <div className={css.Table}>
         <div className={css.Head}>

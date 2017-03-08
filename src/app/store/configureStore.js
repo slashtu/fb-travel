@@ -9,10 +9,13 @@ const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 
 export default function configureStore() {
-  const store = createStore(
+  const store = (process.env.NODE_ENV !== 'production') ? createStore(
     reducer,
-    applyMiddleware(sagaMiddleware, logger),
-  )
+    applyMiddleware(
+      sagaMiddleware, 
+      logger,
+    ),
+  ) : createStore( reducer, applyMiddleware(sagaMiddleware));
 
   sagaMiddleware.run(sagas);
 

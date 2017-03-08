@@ -16,7 +16,7 @@ const columns = [{
   title: 'Date',
   key: 'date',
 }];
-
+//http://maps.google.com/maps?q=24.197611,120.780512
 const detailColumns = [
   {
     title: 'country',
@@ -29,7 +29,7 @@ const detailColumns = [
   {
     title: 'street',
     key: 'street',
-  }
+  },
 ];
 
 class TravelInfo extends Component {
@@ -48,6 +48,8 @@ class TravelInfo extends Component {
         country: item.place.location.country,
         city: item.place.location.city,
         street: item.place.location.street,
+        latitude: item.place.location.latitude,
+        longitude: item.place.location.longitude,
       }
     })
 

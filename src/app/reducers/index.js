@@ -14,7 +14,7 @@ const taggedPlaces = (state = initState, action) => {
   switch (action.type) {
     case UPDATE_TAGGED_PLACES:
       return { 
-        data: action.places.data,
+        data: [...state.data, ...action.places.data],
         isLoading: false,
       };
     default:

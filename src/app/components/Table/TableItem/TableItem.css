@@ -42,5 +42,14 @@
         color: $color-table-detail-value;
       }
     }
+
+    a{
+      color: $hyperlink-text-primary;
+      text-decoration: none;
+    }
   }
+}
+
+.marker {
+  position: absolute;
 }

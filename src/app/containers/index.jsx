@@ -9,10 +9,8 @@ import APnxg from './AP';
 
 const routes = (
   <Router history={browserHistory}>
-    <Route path="/" component={App} >
-      <Route path='AP' component={APnxg} />
-    </Route>
-    <Redirect from='*' to={'App'} />
+    <Route path="/app/fb-travel" component={App} />
+    <Route path="/app/nxg" component={APnxg} />
   </Router>
 );
 

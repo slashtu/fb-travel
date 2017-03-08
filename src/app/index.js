@@ -13,7 +13,7 @@ const store = configureStore();
 
 render( 
   <Provider store={store}>
-    <App />
+    {routes}
   </Provider>,
   document.getElementById('root')
 );

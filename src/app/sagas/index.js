@@ -18,15 +18,28 @@ export function* fetchFBLoginStatus() {
   yield put(updateFBLoginStatus(status));
 }
 
+// export function* fetchPagingTaggedPlaces(url) {
+//   const places = yield SDK.apiAsync('/me/tagged_places', 'GET', {});
+//   yield put(updateTaggedPlaces(places));
+// }
+
 export function* fetchTaggedPlacesTask() {
+  let places;
   const SDK = yield loadFBSDK();
   const response = yield SDK.getLoginStatusAsync();
   
   yield put(updateFBLoginStatus(response));
 
   if (response.status === 'connected') {
-    const places = yield SDK.apiAsync('/me/tagged_places', 'GET', {});
+    places = yield SDK.apiAsync('/me/tagged_places', 'GET', {});
+
     yield put(updateTaggedPlaces(places));
+
+    // get rest of places
+    while( places.paging.next ){
+      places = yield SDK.apiAsync(places.paging.next, 'GET', {});
+      yield put(updateTaggedPlaces(places));
+    }
 
   }else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.

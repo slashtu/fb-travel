@@ -3,6 +3,8 @@ import loadScript from 'tiny-load-script';
 
 let SDK;
 
+const ID = process.env.NODE_ENV === 'development'? 306917059703858 : 306910796371151;
+
 /**
  * Facebook SDK getter
  * @return {Promise} Once resolved it will yield the Facebook SDK object, FB
@@ -14,7 +16,7 @@ export default function loadFBSDK () {
   SDK = SDK || new Promise(function (resolve) {
     function sdkReady () {
       window.FB.init({
-        appId      : '306910796371151',
+        appId      : ID,
         cookie     : true,  // enable cookies to allow the server to access 
                             // the session
         xfbml      : true,  // parse social plugins on this page

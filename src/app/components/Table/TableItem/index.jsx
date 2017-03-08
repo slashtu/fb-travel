@@ -22,15 +22,29 @@ class LogItem extends PureComponent {
     return columns;
   }
 
+  openGoogleMap = (e) => {
+    e.stopPropagation();
+  }
+
   renderDetail = () => {
+    const item = this.props.item;
     const detailColumns = this.props.detailColumns.map((column) => {
       return (
         <div key={column.key}>
           <span>{column.key}</span>
-          <span>{this.props.item[column.key]}</span>
+          <span>{item[column.key]}</span>
         </div> 
       )
     })
+
+    const googleMap = (
+      <div key="googlemap">
+        <span><a onClick={this.openGoogleMap} target="_blank" href={`http://maps.google.com/maps?q=${item.latitude},${item.longitude}`}>open google map</a></span>
+      </div> 
+    )
+
+    detailColumns.push(googleMap)
+
     return detailColumns;
   }
 
