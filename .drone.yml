@@ -3,3 +3,8 @@ pipeline:
     image: node:8.4.0
     commands:
       - npm install
+   
+    publish:
+      image: plugins/npm
+      when:
+        branch: master
