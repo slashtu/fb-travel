@@ -5,6 +5,6 @@ pipeline:
       - npm install
    
   publish:
-    image: plugins/npm
+    image: slash/fb-travel
     when:
       branch: master
