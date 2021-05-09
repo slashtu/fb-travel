@@ -27,7 +27,7 @@
     "i18n-iso-countries": "^1.8.1",
     "immutability-helper": "^2.0.0",
     "jade": "^1.11.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "morgan": "^1.7.0",
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.3.0",
